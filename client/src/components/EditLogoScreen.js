@@ -85,10 +85,10 @@ class EditLogoScreen extends Component {
                                                         fontSize: parseInt(fontSize.value),
                                                         backgroundColor: backgroundColor.value,
                                                         borderColor: borderColor.value,
-                                                        borderRadius: borderRadius.value,
-                                                        borderWidth: borderWidth.value,
-                                                        padding: padding.value,
-                                                        margin: margin.value
+                                                        borderRadius: parseInt(borderRadius.value),
+                                                        borderWidth: parseInt(borderWidth.value),
+                                                        padding: parseInt(padding.value),
+                                                        margin: parseInt(margin.value)
                                                     }
                                                 });
                                                 text.value = "";
@@ -134,31 +134,31 @@ class EditLogoScreen extends Component {
                                                     <label htmlFor="borderColor">Border Color:</label>
                                                     <input type="color" className="form-control" name="borderColor" ref={node => {
                                                         borderColor = node;
-                                                    }} placeholder="Border Color"/>
+                                                    }} placeholder="Border Color" defaultValue={data.logo.borderColor}/>
                                                 </div>
                                                 <div className="form-group">
                                                     <label htmlFor="borderRadius">Border Radius:</label>
                                                     <input type="number" className="form-control" name="borderRadius" ref={node => {
                                                         borderRadius = node;
-                                                    }} placeholder="Border Radius"/>
+                                                    }} placeholder="Border Radius" defaultValue={data.logo.borderRadius}/>
                                                 </div>
                                                 <div className="form-group">
                                                     <label htmlFor="borderWidth">Border Width:</label>
                                                     <input type="number" className="form-control" name="borderWidth" ref={node => {
                                                         borderWidth = node;
-                                                    }} placeholder="Border Width"/>
+                                                    }} placeholder="Border Width" defaultValue={data.logo.borderWidth}/>
                                                 </div>
                                                 <div className="form-group">
                                                     <label htmlFor="padding">Padding:</label>
                                                     <input type="number" className="form-control" name="padding" ref={node => {
                                                         padding = node;
-                                                    }} placeholder="Padding"/>
+                                                    }} placeholder="Padding" defaultValue={data.logo.padding}/>
                                                 </div>
                                                 <div className="form-group">
                                                     <label htmlFor="margin">Margin:</label>
                                                     <input type="number" className="form-control" name="margin" ref={node => {
                                                         margin = node;
-                                                    }} placeholder="Margin"/>
+                                                    }} placeholder="Margin" defaultValue={data.logo.margin}/>
                                                 </div>
                                                 <button type="submit" className="btn btn-success">Submit</button>
                                             </form>

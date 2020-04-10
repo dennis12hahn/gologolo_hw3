@@ -58,10 +58,10 @@ class CreateLogoScreen extends Component {
                                             fontSize: parseInt(fontSize.value),
                                             backgroundColor: backgroundColor.value,
                                             borderColor: borderColor.value,
-                                            borderRadius: borderRadius.value,
-                                            borderWidth: borderWidth.value,
-                                            padding: padding.value,
-                                            margin: margin.value
+                                            borderRadius: parseInt(borderRadius.value),
+                                            borderWidth: parseInt(borderWidth.value),
+                                            padding: parseInt(padding.value),
+                                            margin: parseInt(margin.value)
                                         }
                                     });
                                     text.value = "";
