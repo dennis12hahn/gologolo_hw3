@@ -37,7 +37,7 @@ const UPDATE_LOGO = gql`
                 id: $id,
                 text: $text,
                 color: $color,
-                fontSize: $fontSize
+                fontSize: $fontSize,
                 backgroundColor: $backgroundColor,
                 borderColor: $borderColor,
                 borderRadius: $borderRadius,
@@ -61,7 +61,6 @@ class EditLogoScreen extends Component {
                 {({loading, error, data}) => {
                     if (loading) return 'Loading...';
                     if (error) return `Error! ${error.message}`;
-
                     return (
                         <Mutation mutation={UPDATE_LOGO} key={data.logo._id}
                                   onCompleted={() => this.props.history.push(`/`)}>
@@ -113,11 +112,11 @@ class EditLogoScreen extends Component {
                                                     <input type="color" className="form-control" name="color"
                                                            ref={node => {
                                                                color = node;
-                                                           }} placeholder="Color" defaultValue={data.logo.color}/>
+                                                           }} defaultValue={data.logo.color}/>
                                                 </div>
                                                 <div className="form-group">
                                                     <label htmlFor="fontSize">Font Size:</label>
-                                                    <input type="text" className="form-control" name="fontSize"
+                                                    <input type="number" className="form-control" name="fontSize"
                                                            ref={node => {
                                                                fontSize = node;
                                                            }} placeholder="Font Size"
@@ -128,13 +127,14 @@ class EditLogoScreen extends Component {
                                                     <input type="color" className="form-control" name="backgroundColor"
                                                            ref={node => {
                                                                backgroundColor = node;
-                                                           }} placeholder="Background Color" defaultValue={data.logo.backgroundColor}/>
+                                                           }} defaultValue={data.logo.backgroundColor}/>
                                                 </div>
                                                 <div className="form-group">
                                                     <label htmlFor="borderColor">Border Color:</label>
-                                                    <input type="color" className="form-control" name="borderColor" ref={node => {
-                                                        borderColor = node;
-                                                    }} placeholder="Border Color" defaultValue={data.logo.borderColor}/>
+                                                    <input type="color" className="form-control" name="borderColor"
+                                                           ref={node => {
+                                                                borderColor = node;
+                                                            }} defaultValue={data.logo.borderColor}/>
                                                 </div>
                                                 <div className="form-group">
                                                     <label htmlFor="borderRadius">Border Radius:</label>
