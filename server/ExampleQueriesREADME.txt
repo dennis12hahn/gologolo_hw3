@@ -1,4 +1,6 @@
-query showAllLogos {
+# A ! after a variable type means non-nullable
+
+query ShowAllLogos {
   logos {
     _id
     text
@@ -23,3 +25,5 @@ mutation DeleteLogoById($id: String!){
     _id
   }
 }
+
+mutation AddLogo($id:String!, $color:String!, )
