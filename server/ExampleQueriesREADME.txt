@@ -4,6 +4,12 @@ query showAllLogos {
     text
     color
     fontSize
+    backgroundColor
+    borderColor
+    borderRadius
+    borderWidth
+    padding
+    margin
     lastUpdate
   }
 }
