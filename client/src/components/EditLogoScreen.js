@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import gql from "graphql-tag";
 import {Query, Mutation} from "react-apollo";
+import Logo from "./Logo";
 
 const GET_LOGO = gql`
     query logo($logoId: String) {
@@ -51,6 +52,12 @@ const UPDATE_LOGO = gql`
 
 class EditLogoScreen extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.currentLogo = React.createRef();
+    }
+
     render() {
         let text, color, fontSize, backgroundColor,
             borderColor, borderRadius, borderWidth,
@@ -75,12 +82,13 @@ class EditLogoScreen extends Component {
                             maxWidth: 'max-content',
                             minWidth: 'min-content'
                         }
-                    }
+                    };
+
                     return (
                         <Mutation mutation={UPDATE_LOGO} key={data.logo._id}
                                   onCompleted={() => this.props.history.push(`/`)}>
                             {(updateLogo, {loading, error}) => (
-                                <div className="container">
+                                <div style={{margin: '5%'}}>
                                     <div className="panel panel-default">
                                         <div className="panel-heading">
                                             <h4><Link to="/">Home</Link></h4>
@@ -89,8 +97,8 @@ class EditLogoScreen extends Component {
                                             </h3>
                                         </div>
                                         <div className="panel-body">
-                                            <div className="container row">
-                                                <div className="col s4">
+                                            <div className="row">
+                                                <div style={{maxWidth: 'fit-content'}} className="col s4">
                                                     <form onSubmit={e => {
                                                         e.preventDefault();
                                                         updateLogo({
@@ -119,75 +127,132 @@ class EditLogoScreen extends Component {
                                                     }}>
                                                         <div className="form-group">
                                                             <label htmlFor="text">Text:</label>
-                                                            <input type="text" className="form-control" name="text"
-                                                                   ref={node => {
-                                                                       text = node;
-                                                                   }} placeholder="Text" defaultValue={data.logo.text}/>
+                                                            <input
+                                                                onChange={(e) => {
+                                                                    this.currentLogo.current.setState({
+                                                                        text: e.target.value
+                                                                    })
+                                                                }}
+                                                                type="text" className="form-control" name="text"
+                                                                ref={node => {
+                                                                    text = node;
+                                                                }}
+                                                                placeholder="Text"
+                                                                defaultValue={data.logo.text}
+                                                            />
                                                         </div>
                                                         <div className="form-group">
                                                             <label htmlFor="color">Color:</label>
-                                                            <input type="color" className="form-control" name="color"
-                                                                   ref={node => {
-                                                                       color = node;
-                                                                   }} defaultValue={data.logo.color}/>
+                                                            <input
+                                                                onChange={(e) => {
+                                                                    this.currentLogo.current.setState({
+                                                                        color: e.target.value
+                                                                    })
+                                                                }}
+                                                                type="color" className="form-control" name="color"
+                                                                ref={node => {
+                                                                    color = node;
+                                                                }} defaultValue={data.logo.color}/>
                                                         </div>
                                                         <div className="form-group">
                                                             <label htmlFor="fontSize">Font Size:</label>
-                                                            <input type="number" className="form-control"
-                                                                   name="fontSize"
-                                                                   ref={node => {
-                                                                       fontSize = node;
-                                                                   }} placeholder="Font Size"
-                                                                   defaultValue={data.logo.fontSize}/>
+                                                            <input
+                                                                onChange={(e) => {
+                                                                    this.currentLogo.current.setState({
+                                                                        fontSize: e.target.value
+                                                                    })
+                                                                }}
+                                                                type="number" className="form-control"
+                                                                name="fontSize"
+                                                                ref={node => {
+                                                                    fontSize = node;
+                                                                }} placeholder="Font Size"
+                                                                defaultValue={data.logo.fontSize}/>
                                                         </div>
                                                         <div className="form-group">
                                                             <label htmlFor="backgroundColor">Background Color:</label>
-                                                            <input type="color" className="form-control"
-                                                                   name="backgroundColor"
-                                                                   ref={node => {
-                                                                       backgroundColor = node;
-                                                                   }} defaultValue={data.logo.backgroundColor}/>
+                                                            <input
+                                                                onChange={(e) => {
+                                                                    this.currentLogo.current.setState({
+                                                                        backgroundColor: e.target.value
+                                                                    })
+                                                                }}
+                                                                type="color" className="form-control"
+                                                                name="backgroundColor"
+                                                                ref={node => {
+                                                                    backgroundColor = node;
+                                                                }} defaultValue={data.logo.backgroundColor}/>
                                                         </div>
                                                         <div className="form-group">
                                                             <label htmlFor="borderColor">Border Color:</label>
-                                                            <input type="color" className="form-control"
-                                                                   name="borderColor"
-                                                                   ref={node => {
-                                                                       borderColor = node;
-                                                                   }} defaultValue={data.logo.borderColor}/>
+                                                            <input
+                                                                onChange={(e) => {
+                                                                    this.currentLogo.current.setState({
+                                                                        borderColor: e.target.value
+                                                                    })
+                                                                }}
+                                                                type="color" className="form-control"
+                                                                name="borderColor"
+                                                                ref={node => {
+                                                                    borderColor = node;
+                                                                }} defaultValue={data.logo.borderColor}/>
                                                         </div>
                                                         <div className="form-group">
                                                             <label htmlFor="borderRadius">Border Radius:</label>
-                                                            <input type="number" className="form-control"
-                                                                   name="borderRadius" ref={node => {
+                                                            <input
+                                                                onChange={(e) => {
+                                                                    this.currentLogo.current.setState({
+                                                                        borderRadius: e.target.value
+                                                                    })
+                                                                }}
+                                                                type="number" className="form-control"
+                                                                name="borderRadius" ref={node => {
                                                                 borderRadius = node;
                                                             }} placeholder="Border Radius"
-                                                                   defaultValue={data.logo.borderRadius}/>
+                                                                defaultValue={data.logo.borderRadius}/>
                                                         </div>
                                                         <div className="form-group">
                                                             <label htmlFor="borderWidth">Border Width:</label>
-                                                            <input type="number" className="form-control"
-                                                                   name="borderWidth"
-                                                                   ref={node => {
-                                                                       borderWidth = node;
-                                                                   }} placeholder="Border Width"
-                                                                   defaultValue={data.logo.borderWidth}/>
+                                                            <input
+                                                                onChange={(e) => {
+                                                                    this.currentLogo.current.setState({
+                                                                        borderWidth: e.target.value
+                                                                    })
+                                                                }}
+                                                                type="number" className="form-control"
+                                                                name="borderWidth"
+                                                                ref={node => {
+                                                                    borderWidth = node;
+                                                                }} placeholder="Border Width"
+                                                                defaultValue={data.logo.borderWidth}/>
                                                         </div>
                                                         <div className="form-group">
                                                             <label htmlFor="padding">Padding:</label>
-                                                            <input type="number" className="form-control" name="padding"
-                                                                   ref={node => {
-                                                                       padding = node;
-                                                                   }} placeholder="Padding"
-                                                                   defaultValue={data.logo.padding}/>
+                                                            <input
+                                                                onChange={(e) => {
+                                                                    this.currentLogo.current.setState({
+                                                                        padding: e.target.value
+                                                                    })
+                                                                }}
+                                                                type="number" className="form-control" name="padding"
+                                                                ref={node => {
+                                                                    padding = node;
+                                                                }} placeholder="Padding"
+                                                                defaultValue={data.logo.padding}/>
                                                         </div>
                                                         <div className="form-group">
                                                             <label htmlFor="margin">Margin:</label>
-                                                            <input type="number" className="form-control" name="margin"
-                                                                   ref={node => {
-                                                                       margin = node;
-                                                                   }} placeholder="Margin"
-                                                                   defaultValue={data.logo.margin}/>
+                                                            <input
+                                                                onChange={(e) => {
+                                                                    this.currentLogo.current.setState({
+                                                                        margin: e.target.value
+                                                                    })
+                                                                }}
+                                                                type="number" className="form-control" name="margin"
+                                                                ref={node => {
+                                                                    margin = node;
+                                                                }} placeholder="Margin"
+                                                                defaultValue={data.logo.margin}/>
                                                         </div>
                                                         <button type="submit" className="btn btn-success">Submit
                                                         </button>
@@ -195,11 +260,11 @@ class EditLogoScreen extends Component {
                                                     {loading && <p>Loading...</p>}
                                                     {error && <p>Error :( Please try again</p>}
                                                 </div>
-                                                <div className="col s8" style={{overflow: 'auto'}}>
-                                                    <div style={styles.container}>
-                                                        {data.logo.text}
-                                                    </div>
-                                                </div>
+                                                <Logo
+                                                    ref={this.currentLogo}
+                                                    text={data.logo.text}
+                                                    style={styles}
+                                                />
                                             </div>
                                         </div>
                                     </div>
