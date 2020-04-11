@@ -58,6 +58,10 @@ class EditLogoScreen extends Component {
         this.currentLogo = React.createRef();
     }
 
+    verifyNumberRange = (min, max, value) => {
+        return Math.max(Number(min), Math.min(Number(max), Number(value)));
+    }
+
     render() {
         let text, color, fontSize, backgroundColor,
             borderColor, borderRadius, borderWidth,
@@ -158,8 +162,10 @@ class EditLogoScreen extends Component {
                                                             <label htmlFor="fontSize">Font Size:</label>
                                                             <input
                                                                 onChange={(e) => {
+                                                                    const newVal = this.verifyNumberRange(e.target.min, e.target.max, e.target.value);
+                                                                    e.target.value = newVal;
                                                                     this.currentLogo.current.setState({
-                                                                        fontSize: e.target.value
+                                                                        fontSize: newVal
                                                                     })
                                                                 }}
                                                                 type="number" className="form-control"
@@ -167,7 +173,10 @@ class EditLogoScreen extends Component {
                                                                 ref={node => {
                                                                     fontSize = node;
                                                                 }} placeholder="Font Size"
-                                                                defaultValue={data.logo.fontSize}/>
+                                                                defaultValue={data.logo.fontSize}
+                                                                min={4}
+                                                                max={144}
+                                                            />
                                                         </div>
                                                         <div className="form-group">
                                                             <label htmlFor="backgroundColor">Background Color:</label>
@@ -201,22 +210,29 @@ class EditLogoScreen extends Component {
                                                             <label htmlFor="borderRadius">Border Radius:</label>
                                                             <input
                                                                 onChange={(e) => {
+                                                                    const newVal = this.verifyNumberRange(e.target.min, e.target.max, e.target.value);
+                                                                    e.target.value = newVal;
                                                                     this.currentLogo.current.setState({
-                                                                        borderRadius: e.target.value
+                                                                        borderRadius: newVal
                                                                     })
                                                                 }}
                                                                 type="number" className="form-control"
                                                                 name="borderRadius" ref={node => {
                                                                 borderRadius = node;
                                                             }} placeholder="Border Radius"
-                                                                defaultValue={data.logo.borderRadius}/>
+                                                                defaultValue={data.logo.borderRadius}
+                                                                min={0}
+                                                                max={50}
+                                                            />
                                                         </div>
                                                         <div className="form-group">
                                                             <label htmlFor="borderWidth">Border Width:</label>
                                                             <input
                                                                 onChange={(e) => {
+                                                                    const newVal = this.verifyNumberRange(e.target.min, e.target.max, e.target.value);
+                                                                    e.target.value = newVal;
                                                                     this.currentLogo.current.setState({
-                                                                        borderWidth: e.target.value
+                                                                        borderWidth: newVal
                                                                     })
                                                                 }}
                                                                 type="number" className="form-control"
@@ -224,35 +240,48 @@ class EditLogoScreen extends Component {
                                                                 ref={node => {
                                                                     borderWidth = node;
                                                                 }} placeholder="Border Width"
-                                                                defaultValue={data.logo.borderWidth}/>
+                                                                defaultValue={data.logo.borderWidth}
+                                                                min={0}
+                                                                max={144}
+                                                            />
                                                         </div>
                                                         <div className="form-group">
                                                             <label htmlFor="padding">Padding:</label>
                                                             <input
                                                                 onChange={(e) => {
+                                                                    const newVal = this.verifyNumberRange(e.target.min, e.target.max, e.target.value);
+                                                                    e.target.value = newVal;
                                                                     this.currentLogo.current.setState({
-                                                                        padding: e.target.value
+                                                                        padding: newVal
                                                                     })
                                                                 }}
                                                                 type="number" className="form-control" name="padding"
                                                                 ref={node => {
                                                                     padding = node;
                                                                 }} placeholder="Padding"
-                                                                defaultValue={data.logo.padding}/>
+                                                                defaultValue={data.logo.padding}
+                                                                min={0}
+                                                                max={144}
+                                                            />
                                                         </div>
                                                         <div className="form-group">
                                                             <label htmlFor="margin">Margin:</label>
                                                             <input
                                                                 onChange={(e) => {
+                                                                    const newVal = this.verifyNumberRange(e.target.min, e.target.max, e.target.value);
+                                                                    e.target.value = newVal;
                                                                     this.currentLogo.current.setState({
-                                                                        margin: e.target.value
+                                                                        margin: newVal
                                                                     })
                                                                 }}
                                                                 type="number" className="form-control" name="margin"
                                                                 ref={node => {
                                                                     margin = node;
                                                                 }} placeholder="Margin"
-                                                                defaultValue={data.logo.margin}/>
+                                                                defaultValue={data.logo.margin}
+                                                                min={0}
+                                                                max={144}
+                                                            />
                                                         </div>
                                                         <button type="submit" className="btn btn-success">Submit
                                                         </button>
