@@ -22,7 +22,9 @@ class HomeScreen extends Component {
                 {({loading, error, data}) => {
                     if (loading) return 'Loading...';
                     if (error) return `Error! ${error.message}`;
-
+                    data.logos.sort(function compare(a, b) {
+                        return new Date(b.lastUpdate) - new Date(a.lastUpdate);
+                    });
                     return (
                         <div className="container row">
                             <div className="col s4 text-center">
@@ -32,7 +34,8 @@ class HomeScreen extends Component {
                                         {data.logos.map((logo, index) => (
                                             <div key={index} className='home_logo_link list-group-item'
                                                  style={{cursor: "pointer"}}>
-                                                <Link style={{fontSize: "large"}} to={`/view/${logo._id}`}>{logo.text}</Link>
+                                                <Link style={{fontSize: "large"}}
+                                                      to={`/view/${logo._id}`}>{logo.text}</Link>
                                             </div>
                                         ))}
                                     </ul>

@@ -17,8 +17,7 @@ const ADD_LOGO = gql`
         addLogo(
             text: $text,
             color: $color,
-            fontSize: $fontSize
-            fontSize: $fontSize
+            fontSize: $fontSize,
             backgroundColor: $backgroundColor,
             borderColor: $borderColor,
             borderRadius: $borderRadius,
@@ -84,7 +83,7 @@ class CreateLogoScreen extends Component {
                                         <label htmlFor="color">Color:</label>
                                         <input type="color" className="form-control" name="color" ref={node => {
                                             color = node;
-                                        }} placeholder="Color"/>
+                                        }}/>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="fontSize">Font Size:</label>
@@ -96,13 +95,13 @@ class CreateLogoScreen extends Component {
                                         <label htmlFor="backgroundColor">Background Color:</label>
                                         <input type="color" className="form-control" name="backgroundColor" ref={node => {
                                             backgroundColor = node;
-                                        }} placeholder="Background Color"/>
+                                        }}/>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="borderColor">Border Color:</label>
                                         <input type="color" className="form-control" name="borderColor" ref={node => {
                                             borderColor = node;
-                                        }} placeholder="Border Color"/>
+                                        }}/>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="borderRadius">Border Radius:</label>
