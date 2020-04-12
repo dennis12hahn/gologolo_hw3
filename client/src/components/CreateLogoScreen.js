@@ -38,11 +38,11 @@ class CreateLogoScreen extends Component {
         this.currentLogo = React.createRef();
         this.defaultStyles = {
             container: {
-                color: 'red',
+                color: '#ff0000',
                 fontSize: '50',
-                backgroundColor: 'blue',
+                backgroundColor: '#0000ff',
                 border: 'solid',
-                borderColor: 'black',
+                borderColor: '#000000',
                 borderRadius: '20',
                 borderWidth: '10',
                 padding: '5',
@@ -52,6 +52,10 @@ class CreateLogoScreen extends Component {
             }
         }
         this.defaultText = 'logo';
+    }
+
+    verifyNumberRange = (min, max, value) => {
+        return Math.max(Number(min), Math.min(Number(max), Number(value)));
     }
 
     render() {
@@ -100,77 +104,163 @@ class CreateLogoScreen extends Component {
                                         }}>
                                             <div className="form-group">
                                                 <label htmlFor="text">Text:</label>
-                                                <input type="text" className="form-control" name="text" ref={node => {
-                                                    text = node;
-                                                }} placeholder="Text"
-                                                       defaultValue={this.defaultText}
+                                                <input
+                                                    onChange={(e) => {
+                                                        this.currentLogo.current.setState({
+                                                            text: e.target.value
+                                                        })
+                                                    }}
+                                                    type="text" className="form-control" name="text"
+                                                    ref={node => {
+                                                        text = node;
+                                                    }}
+                                                    placeholder="Text"
+                                                    defaultValue={this.defaultText}
                                                 />
                                             </div>
                                             <div className="form-group">
                                                 <label htmlFor="color">Color:</label>
-                                                <input type="color" className="form-control" name="color" ref={node => {
-                                                    color = node;
-                                                }}
-                                                       defaultValue={this.defaultStyles.container.color}/>
+                                                <input
+                                                    onChange={(e) => {
+                                                        this.currentLogo.current.setState({
+                                                            color: e.target.value
+                                                        })
+                                                    }}
+                                                    type="color" className="form-control" name="color"
+                                                    ref={node => {
+                                                        color = node;
+                                                    }}
+                                                    defaultValue={this.defaultStyles.container.color}
+                                                />
                                             </div>
                                             <div className="form-group">
                                                 <label htmlFor="fontSize">Font Size:</label>
-                                                <input type="number" className="form-control" name="fontSize"
-                                                       ref={node => {
-                                                           fontSize = node;
-                                                       }} placeholder="Font Size"
-                                                       defaultValue={this.defaultStyles.container.fontSize}/>
+                                                <input
+                                                    onChange={(e) => {
+                                                        const newVal = this.verifyNumberRange(e.target.min, e.target.max, e.target.value);
+                                                        e.target.value = newVal;
+                                                        this.currentLogo.current.setState({
+                                                            fontSize: newVal
+                                                        })
+                                                    }}
+                                                    type="number" className="form-control" name="fontSize"
+                                                    ref={node => {
+                                                        fontSize = node;
+                                                    }}
+                                                    placeholder="Font Size"
+                                                    defaultValue={this.defaultStyles.container.fontSize}
+                                                    min={4}
+                                                    max={144}
+                                                />
                                             </div>
                                             <div className="form-group">
                                                 <label htmlFor="backgroundColor">Background Color:</label>
-                                                <input type="color" className="form-control" name="backgroundColor"
-                                                       ref={node => {
-                                                           backgroundColor = node;
-                                                       }}
-                                                       defaultValue={this.defaultStyles.container.backgroundColor}/>
+                                                <input
+                                                    onChange={(e) => {
+                                                        this.currentLogo.current.setState({
+                                                            backgroundColor: e.target.value
+                                                        })
+                                                    }}
+                                                    type="color" className="form-control" name="backgroundColor"
+                                                    ref={node => {
+                                                        backgroundColor = node;
+                                                    }}
+                                                    defaultValue={this.defaultStyles.container.backgroundColor}
+                                                />
                                             </div>
                                             <div className="form-group">
                                                 <label htmlFor="borderColor">Border Color:</label>
-                                                <input type="color" className="form-control" name="borderColor"
-                                                       ref={node => {
-                                                           borderColor = node;
-                                                       }}
-                                                       defaultValue={this.defaultStyles.container.borderColor}/>
+                                                <input
+                                                    onChange={(e) => {
+                                                        this.currentLogo.current.setState({
+                                                            borderColor: e.target.value
+                                                        })
+                                                    }}
+                                                    type="color" className="form-control" name="borderColor"
+                                                    ref={node => {
+                                                        borderColor = node;
+                                                    }}
+                                                    defaultValue={this.defaultStyles.container.borderColor}/>
                                             </div>
                                             <div className="form-group">
                                                 <label htmlFor="borderRadius">Border Radius:</label>
-                                                <input type="number" className="form-control" name="borderRadius"
-                                                       ref={node => {
-                                                           borderRadius = node;
-                                                       }}
-                                                       defaultValue={this.defaultStyles.container.borderRadius}
-                                                       placeholder="Border Radius"/>
+                                                <input
+                                                    onChange={(e) => {
+                                                        const newVal = this.verifyNumberRange(e.target.min, e.target.max, e.target.value);
+                                                        e.target.value = newVal;
+                                                        this.currentLogo.current.setState({
+                                                            borderRadius: newVal
+                                                        })
+                                                    }}
+                                                    type="number" className="form-control" name="borderRadius"
+                                                    ref={node => {
+                                                        borderRadius = node;
+                                                    }}
+                                                    defaultValue={this.defaultStyles.container.borderRadius}
+                                                    placeholder="Border Radius"
+                                                    min={0}
+                                                    max={50}
+                                                />
                                             </div>
                                             <div className="form-group">
                                                 <label htmlFor="borderWidth">Border Width:</label>
-                                                <input type="number" className="form-control" name="borderWidth"
-                                                       ref={node => {
-                                                           borderWidth = node;
-                                                       }}
-                                                       defaultValue={this.defaultStyles.container.borderWidth}
-                                                       placeholder="Border Width"/>
+                                                <input
+                                                    onChange={(e) => {
+                                                        const newVal = this.verifyNumberRange(e.target.min, e.target.max, e.target.value);
+                                                        e.target.value = newVal;
+                                                        this.currentLogo.current.setState({
+                                                            borderWidth: newVal
+                                                        })
+                                                    }}
+                                                    type="number" className="form-control" name="borderWidth"
+                                                    ref={node => {
+                                                        borderWidth = node;
+                                                    }}
+                                                    defaultValue={this.defaultStyles.container.borderWidth}
+                                                    placeholder="Border Width"
+                                                    min={0}
+                                                    max={144}
+                                                />
                                             </div>
                                             <div className="form-group">
                                                 <label htmlFor="padding">Padding:</label>
-                                                <input type="number" className="form-control" name="padding"
-                                                       ref={node => {
-                                                           padding = node;
-                                                       }}
-                                                       defaultValue={this.defaultStyles.container.padding}
-                                                       placeholder="Padding"/>
+                                                <input
+                                                    onChange={(e) => {
+                                                        const newVal = this.verifyNumberRange(e.target.min, e.target.max, e.target.value);
+                                                        e.target.value = newVal;
+                                                        this.currentLogo.current.setState({
+                                                            padding: newVal
+                                                        })
+                                                    }}
+                                                    type="number" className="form-control" name="padding"
+                                                    ref={node => {
+                                                        padding = node;
+                                                    }}
+                                                    defaultValue={this.defaultStyles.container.padding}
+                                                    placeholder="Padding"
+                                                    min={0}
+                                                    max={144}
+                                                />
                                             </div>
                                             <div className="form-group">
                                                 <label htmlFor="margin">Margin:</label>
-                                                <input type="number" className="form-control" name="margin"
-                                                       ref={node => {
-                                                           margin = node;
-                                                       }} defaultValue={this.defaultStyles.container.margin}
-                                                       placeholder="Margin"/>
+                                                <input
+                                                    onChange={(e) => {
+                                                        const newVal = this.verifyNumberRange(e.target.min, e.target.max, e.target.value);
+                                                        e.target.value = newVal;
+                                                        this.currentLogo.current.setState({
+                                                            margin: newVal
+                                                        })
+                                                    }}
+                                                    type="number" className="form-control" name="margin"
+                                                    ref={node => {
+                                                        margin = node;
+                                                    }}
+                                                    defaultValue={this.defaultStyles.container.margin}
+                                                    placeholder="Margin"
+                                                    min={0}
+                                                    max={144}
+                                                />
                                             </div>
                                             <button type="submit" className="btn btn-success">Submit</button>
                                         </form>

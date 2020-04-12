@@ -204,7 +204,8 @@ class EditLogoScreen extends Component {
                                                                 name="borderColor"
                                                                 ref={node => {
                                                                     borderColor = node;
-                                                                }} defaultValue={data.logo.borderColor}/>
+                                                                }}
+                                                                defaultValue={data.logo.borderColor}/>
                                                         </div>
                                                         <div className="form-group">
                                                             <label htmlFor="borderRadius">Border Radius:</label>
