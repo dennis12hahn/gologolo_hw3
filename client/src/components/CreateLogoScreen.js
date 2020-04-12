@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import gql from "graphql-tag";
 import {Mutation} from "react-apollo";
 import {Link} from 'react-router-dom';
+import Logo from "./Logo";
 
 const ADD_LOGO = gql`
     mutation AddLogo(
@@ -31,6 +32,28 @@ const ADD_LOGO = gql`
 
 class CreateLogoScreen extends Component {
 
+    constructor() {
+        super();
+
+        this.currentLogo = React.createRef();
+        this.defaultStyles = {
+            container: {
+                color: 'red',
+                fontSize: '50',
+                backgroundColor: 'blue',
+                border: 'solid',
+                borderColor: 'black',
+                borderRadius: '20',
+                borderWidth: '10',
+                padding: '5',
+                margin: '5',
+                maxWidth: 'max-content',
+                minWidth: 'min-content'
+            }
+        }
+        this.defaultText = 'logo';
+    }
+
     render() {
         let text, color, fontSize, backgroundColor,
             borderColor, borderRadius, borderWidth,
@@ -39,7 +62,7 @@ class CreateLogoScreen extends Component {
         return (
             <Mutation mutation={ADD_LOGO} onCompleted={() => this.props.history.push('/')}>
                 {(addLogo, {loading, error}) => (
-                    <div className="container">
+                    <div style={{margin: '5%'}}>
                         <div className="panel panel-default">
                             <div className="panel-heading">
                                 <h4><Link to="/">Home</Link></h4>
@@ -48,89 +71,118 @@ class CreateLogoScreen extends Component {
                                 </h3>
                             </div>
                             <div className="panel-body">
-                                <form onSubmit={e => {
-                                    e.preventDefault();
-                                    addLogo({
-                                        variables: {
-                                            text: text.value,
-                                            color: color.value,
-                                            fontSize: parseInt(fontSize.value),
-                                            backgroundColor: backgroundColor.value,
-                                            borderColor: borderColor.value,
-                                            borderRadius: parseInt(borderRadius.value),
-                                            borderWidth: parseInt(borderWidth.value),
-                                            padding: parseInt(padding.value),
-                                            margin: parseInt(margin.value)
-                                        }
-                                    });
-                                    text.value = "";
-                                    color.value = "";
-                                    fontSize.value = "";
-                                    backgroundColor.value = "";
-                                    borderColor.value = "";
-                                    borderRadius.value = "";
-                                    borderWidth.value = "";
-                                    padding.value = "";
-                                    margin.value = "";
-                                }}>
-                                    <div className="form-group">
-                                        <label htmlFor="text">Text:</label>
-                                        <input type="text" className="form-control" name="text" ref={node => {
-                                            text = node;
-                                        }} placeholder="Text"/>
+                                <div className='row'>
+                                    <div style={{maxWidth: 'fit-content'}} className='col s4'>
+                                        <form onSubmit={e => {
+                                            e.preventDefault();
+                                            addLogo({
+                                                variables: {
+                                                    text: text.value,
+                                                    color: color.value,
+                                                    fontSize: parseInt(fontSize.value),
+                                                    backgroundColor: backgroundColor.value,
+                                                    borderColor: borderColor.value,
+                                                    borderRadius: parseInt(borderRadius.value),
+                                                    borderWidth: parseInt(borderWidth.value),
+                                                    padding: parseInt(padding.value),
+                                                    margin: parseInt(margin.value)
+                                                }
+                                            });
+                                            text.value = "";
+                                            color.value = "";
+                                            fontSize.value = "";
+                                            backgroundColor.value = "";
+                                            borderColor.value = "";
+                                            borderRadius.value = "";
+                                            borderWidth.value = "";
+                                            padding.value = "";
+                                            margin.value = "";
+                                        }}>
+                                            <div className="form-group">
+                                                <label htmlFor="text">Text:</label>
+                                                <input type="text" className="form-control" name="text" ref={node => {
+                                                    text = node;
+                                                }} placeholder="Text"
+                                                       defaultValue={this.defaultText}
+                                                />
+                                            </div>
+                                            <div className="form-group">
+                                                <label htmlFor="color">Color:</label>
+                                                <input type="color" className="form-control" name="color" ref={node => {
+                                                    color = node;
+                                                }}
+                                                       defaultValue={this.defaultStyles.container.color}/>
+                                            </div>
+                                            <div className="form-group">
+                                                <label htmlFor="fontSize">Font Size:</label>
+                                                <input type="number" className="form-control" name="fontSize"
+                                                       ref={node => {
+                                                           fontSize = node;
+                                                       }} placeholder="Font Size"
+                                                       defaultValue={this.defaultStyles.container.fontSize}/>
+                                            </div>
+                                            <div className="form-group">
+                                                <label htmlFor="backgroundColor">Background Color:</label>
+                                                <input type="color" className="form-control" name="backgroundColor"
+                                                       ref={node => {
+                                                           backgroundColor = node;
+                                                       }}
+                                                       defaultValue={this.defaultStyles.container.backgroundColor}/>
+                                            </div>
+                                            <div className="form-group">
+                                                <label htmlFor="borderColor">Border Color:</label>
+                                                <input type="color" className="form-control" name="borderColor"
+                                                       ref={node => {
+                                                           borderColor = node;
+                                                       }}
+                                                       defaultValue={this.defaultStyles.container.borderColor}/>
+                                            </div>
+                                            <div className="form-group">
+                                                <label htmlFor="borderRadius">Border Radius:</label>
+                                                <input type="number" className="form-control" name="borderRadius"
+                                                       ref={node => {
+                                                           borderRadius = node;
+                                                       }}
+                                                       defaultValue={this.defaultStyles.container.borderRadius}
+                                                       placeholder="Border Radius"/>
+                                            </div>
+                                            <div className="form-group">
+                                                <label htmlFor="borderWidth">Border Width:</label>
+                                                <input type="number" className="form-control" name="borderWidth"
+                                                       ref={node => {
+                                                           borderWidth = node;
+                                                       }}
+                                                       defaultValue={this.defaultStyles.container.borderWidth}
+                                                       placeholder="Border Width"/>
+                                            </div>
+                                            <div className="form-group">
+                                                <label htmlFor="padding">Padding:</label>
+                                                <input type="number" className="form-control" name="padding"
+                                                       ref={node => {
+                                                           padding = node;
+                                                       }}
+                                                       defaultValue={this.defaultStyles.container.padding}
+                                                       placeholder="Padding"/>
+                                            </div>
+                                            <div className="form-group">
+                                                <label htmlFor="margin">Margin:</label>
+                                                <input type="number" className="form-control" name="margin"
+                                                       ref={node => {
+                                                           margin = node;
+                                                       }} defaultValue={this.defaultStyles.container.margin}
+                                                       placeholder="Margin"/>
+                                            </div>
+                                            <button type="submit" className="btn btn-success">Submit</button>
+                                        </form>
+                                        {loading && <p>Loading...</p>}
+                                        {error && <p>Error :( Please try again</p>}
                                     </div>
-                                    <div className="form-group">
-                                        <label htmlFor="color">Color:</label>
-                                        <input type="color" className="form-control" name="color" ref={node => {
-                                            color = node;
-                                        }}/>
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="fontSize">Font Size:</label>
-                                        <input type="number" className="form-control" name="fontSize" ref={node => {
-                                            fontSize = node;
-                                        }} placeholder="Font Size"/>
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="backgroundColor">Background Color:</label>
-                                        <input type="color" className="form-control" name="backgroundColor" ref={node => {
-                                            backgroundColor = node;
-                                        }}/>
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="borderColor">Border Color:</label>
-                                        <input type="color" className="form-control" name="borderColor" ref={node => {
-                                            borderColor = node;
-                                        }}/>
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="borderRadius">Border Radius:</label>
-                                        <input type="number" className="form-control" name="borderRadius" ref={node => {
-                                            borderRadius = node;
-                                        }} placeholder="Border Radius"/>
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="borderWidth">Border Width:</label>
-                                        <input type="number" className="form-control" name="borderWidth" ref={node => {
-                                            borderWidth = node;
-                                        }} placeholder="Border Width"/>
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="padding">Padding:</label>
-                                        <input type="number" className="form-control" name="padding" ref={node => {
-                                            padding = node;
-                                        }} placeholder="Padding"/>
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="margin">Margin:</label>
-                                        <input type="number" className="form-control" name="margin" ref={node => {
-                                            margin = node;
-                                        }} placeholder="Margin"/>
-                                    </div>
-                                    <button type="submit" className="btn btn-success">Submit</button>
-                                </form>
-                                {loading && <p>Loading...</p>}
-                                {error && <p>Error :( Please try again</p>}
+                                    <Logo
+                                        ref={this.currentLogo}
+                                        text={this.defaultText}
+                                        style={this.defaultStyles}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
