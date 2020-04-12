@@ -56,7 +56,7 @@ class ViewLogoScreen extends Component {
                     };
 
                     return (
-                        <div className="container">
+                        <div style={{marginLeft: '5%', marginRight: '5%'}}>
                             <div className="panel panel-default">
                                 <div className="panel-heading">
                                     <h4><Link to="/">Home</Link></h4>
