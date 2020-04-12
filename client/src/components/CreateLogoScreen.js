@@ -36,6 +36,7 @@ class CreateLogoScreen extends Component {
         super();
 
         this.currentLogo = React.createRef();
+        this.submitButton = React.createRef();
         this.defaultStyles = {
             container: {
                 color: '#ff0000',
@@ -109,6 +110,7 @@ class CreateLogoScreen extends Component {
                                                         this.currentLogo.current.setState({
                                                             text: e.target.value
                                                         })
+                                                        this.submitButton.current.disabled = text.value.trim() === '';
                                                     }}
                                                     type="text" className="form-control" name="text"
                                                     ref={node => {
@@ -262,7 +264,9 @@ class CreateLogoScreen extends Component {
                                                     max={144}
                                                 />
                                             </div>
-                                            <button type="submit" className="btn btn-success">Submit</button>
+                                            <button ref={this.submitButton} type="submit"
+                                                    className="btn btn-success">Submit
+                                            </button>
                                         </form>
                                         {loading && <p>Loading...</p>}
                                         {error && <p>Error :( Please try again</p>}
