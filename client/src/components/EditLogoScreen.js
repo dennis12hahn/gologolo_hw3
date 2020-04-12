@@ -54,8 +54,8 @@ class EditLogoScreen extends Component {
 
     constructor(props) {
         super(props);
-
         this.currentLogo = React.createRef();
+        this.submitButton = React.createRef();
     }
 
     verifyNumberRange = (min, max, value) => {
@@ -136,6 +136,7 @@ class EditLogoScreen extends Component {
                                                                     this.currentLogo.current.setState({
                                                                         text: e.target.value
                                                                     })
+                                                                    this.submitButton.current.disabled = text.value.trim() === '';
                                                                 }}
                                                                 type="text" className="form-control" name="text"
                                                                 ref={node => {
@@ -284,7 +285,9 @@ class EditLogoScreen extends Component {
                                                                 max={144}
                                                             />
                                                         </div>
-                                                        <button type="submit" className="btn btn-success">Submit
+                                                        <button
+                                                            ref={this.submitButton}
+                                                            type="submit" className="btn btn-success">Submit
                                                         </button>
                                                     </form>
                                                     {loading && <p>Loading...</p>}
