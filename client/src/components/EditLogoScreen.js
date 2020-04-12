@@ -92,7 +92,7 @@ class EditLogoScreen extends Component {
                         <Mutation mutation={UPDATE_LOGO} key={data.logo._id}
                                   onCompleted={() => this.props.history.push(`/`)}>
                             {(updateLogo, {loading, error}) => (
-                                <div style={{margin: '5%'}}>
+                                <div style={{marginLeft: '5%', marginRight: '5%'}}>
                                     <div className="panel panel-default">
                                         <div className="panel-heading">
                                             <h4><Link to="/">Home</Link></h4>
@@ -144,6 +144,7 @@ class EditLogoScreen extends Component {
                                                                 }}
                                                                 placeholder="Text"
                                                                 defaultValue={data.logo.text}
+                                                                maxLength={30}
                                                             />
                                                         </div>
                                                         <div className="form-group">

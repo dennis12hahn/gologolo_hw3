@@ -67,7 +67,7 @@ class CreateLogoScreen extends Component {
         return (
             <Mutation mutation={ADD_LOGO} onCompleted={() => this.props.history.push('/')}>
                 {(addLogo, {loading, error}) => (
-                    <div style={{margin: '5%'}}>
+                    <div style={{marginLeft: '5%', marginRight: '5%'}}>
                         <div className="panel panel-default">
                             <div className="panel-heading">
                                 <h4><Link to="/">Home</Link></h4>
@@ -118,6 +118,7 @@ class CreateLogoScreen extends Component {
                                                     }}
                                                     placeholder="Text"
                                                     defaultValue={this.defaultText}
+                                                    maxLength={30}
                                                 />
                                             </div>
                                             <div className="form-group">
